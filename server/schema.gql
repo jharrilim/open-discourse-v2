@@ -1,0 +1,95 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Topic {
+  id: String!
+  createdOn: String!
+  name: String!
+
+  """Content written by users pertaining to this topic."""
+  posts: [Post!]!
+}
+
+type Post {
+  id: String!
+
+  """The user who created this Post."""
+  creator: User!
+  topic: Topic!
+  title: String!
+  content: String!
+}
+
+type User {
+  id: String!
+  createdOn: DateTime!
+  name: String!
+  posts: [Post!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  user(id: String!): User!
+  post(id: String!): Post!
+  topic(id: String!): Topic!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  removePost(id: String!): Post!
+  createTopic(createTopicInput: CreateTopicInput!): Topic!
+  updateTopic(updateTopicInput: UpdateTopicInput!): Topic!
+  removeTopic(id: String!): Topic!
+}
+
+input CreateUserInput {
+  """Your name, please."""
+  name: String!
+}
+
+input UpdateUserInput {
+  """Your name, please."""
+  name: String
+  id: String!
+}
+
+input CreatePostInput {
+  """The ID of the user who is creating this post."""
+  userId: String!
+
+  """The ID of the topic that this post belongs to."""
+  topicId: String!
+  title: String!
+  content: String!
+}
+
+input UpdatePostInput {
+  """The ID of the user who is creating this post."""
+  userId: String
+
+  """The ID of the topic that this post belongs to."""
+  topicId: String
+  title: String
+  content: String
+  id: String!
+}
+
+input CreateTopicInput {
+  """The name of the Topic."""
+  name: String!
+}
+
+input UpdateTopicInput {
+  """The name of the Topic."""
+  name: String
+  id: String!
+}

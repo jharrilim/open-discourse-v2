@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": ".",
+		},
+		{
+			"path": "server"
+		},
+		{
+			"path": "web"
+		},
+		{
+			"path": "database"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"server": true,
+			"web": true,
+			"database": true
+		}
+	}
+}
