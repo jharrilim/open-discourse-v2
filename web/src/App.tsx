@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { CircularProgress, CssBaseline } from '@material-ui/core';
 
-function App() {
+const HomePage = React.lazy(() => import('./pages/home'));
+
+const client = new ApolloClient({
+  uri: process.env.SERVER_URL ?? 'http://localhost:8765/graphql',
+  cache: new InMemoryCache(),
+});
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <CssBaseline />
+      <Suspense fallback={<CircularProgress />}>
+        <HomePage />
+      </Suspense>
+    </ApolloProvider>
   );
 }
 
