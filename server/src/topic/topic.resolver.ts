@@ -13,7 +13,7 @@ export class TopicResolver {
     return this.topicService.create(createTopicInput);
   }
 
-  @Query(() => [Topic], { name: 'topic' })
+  @Query(() => [Topic], { name: 'topics' })
   findAll() {
     return this.topicService.findAll();
   }

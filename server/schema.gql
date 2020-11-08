@@ -36,6 +36,7 @@ scalar DateTime
 type Query {
   user(id: String!): User!
   post(id: String!): Post!
+  topics: [Topic!]!
   topic(id: String!): Topic!
 }
 

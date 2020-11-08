@@ -1,26 +1,10 @@
-import classes from '*.module.css';
-import { gql, useMutation, useQuery } from '@apollo/client';
 import { Button, CircularProgress, Grid, IconButton, Input, makeStyles, Snackbar, Typography } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import { TopicForm } from '../components/topic-form';
+import TopicTable from '../components/topic-table';
+import { useCreateTopic, useCreateUser } from '../mutations';
 
-interface CreateUserResponse {
-  id: string;
-  name: string;
-  createdOn: string;
-}
-
-interface CreateUserVariables {
-  name: string;
-}
-
-const CREATE_USER = gql`
-  mutation CreateUser($name: String!) {
-    createUser(createUserInput: { name: $name }) {
-      id name createdOn
-    }
-  }
-`;
 
 const useStyles = makeStyles(theme => ({
   home: {
@@ -29,8 +13,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 const HomePage = forwardRef<HTMLDivElement>(({ }, ref) => {
-  const [createUser, { loading, data, error }] = useMutation<CreateUserResponse, CreateUserVariables>(CREATE_USER);
+  const [createUser, { loading, data, error }] = useCreateUser();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [username, setUsername] = useState('');
@@ -55,7 +40,7 @@ const HomePage = forwardRef<HTMLDivElement>(({ }, ref) => {
 
   return (
     <Grid ref={ref} className={classes.home} container item xs={12} justify="center" alignItems="center">
-      <Grid container item md={6} justify="center" spacing={2}>
+      <Grid container item md={8} justify="center" spacing={2}>
         <Typography>Create User</Typography>
         <Grid container item xs={12} justify="center">
           <Input
@@ -75,6 +60,15 @@ const HomePage = forwardRef<HTMLDivElement>(({ }, ref) => {
               createUser({ variables: { name: username } });
             }}
           />
+        </Grid>
+        <Grid container item xs={12} justify="center">
+          <TopicForm onTopicCreated={topic => {
+            setSnackbarMessage('Topic created: ' + JSON.stringify(topic));
+            setSnackbarOpen(true);
+          }} />
+        </Grid>
+        <Grid container item xs={12} justify="center">
+          <TopicTable />
         </Grid>
       </Grid>
       <Snackbar
