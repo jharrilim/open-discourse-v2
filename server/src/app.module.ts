@@ -13,7 +13,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       autoSchemaFile: 'schema.gql',
       tracing: true,
     }),
-    TypeOrmModule.forRoot({
+    TypeOrmModule.forRoot(process.env.NODE_ENV === 'development' ? {
       type: 'postgres',
       host: 'localhost',
       port: 5432,
@@ -23,6 +23,10 @@ import { GraphQLModule } from '@nestjs/graphql';
       entities: ['dist/**/*.entity.js'],
       synchronize: true,
       dropSchema: true,
+    } : {
+      type: 'postgres',
+      entities: ['dist/**/*.entity.js'],
+      url: process.env.DATABASE_URL,
     }),
     UserModule,
     PostModule,
