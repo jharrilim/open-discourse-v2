@@ -4,12 +4,12 @@ import React, { useEffect } from 'react';
 import { useGetTopics } from '../queries';
 
 const useStyles = makeStyles(theme => ({
-  topicForm: {
+  topicTable: {
     minHeight: '300px',
   },
 }));
 
-export const TopicForm = () => {
+export const TopicTable = () => {
   const { data, loading, error, startPolling, stopPolling } = useGetTopics();
   const classes = useStyles();
 
@@ -22,7 +22,7 @@ export const TopicForm = () => {
 
   if(error)
     console.log(error);
-  console.log(data);
+
   const rows = data 
     ? data.topics.map(d => ({ id: d.id, createdOn: d.createdOn, name: d.name }))
     : [];
@@ -36,10 +36,10 @@ export const TopicForm = () => {
   if (loading) return <CircularProgress />;
 
   return (
-    <Grid container item xs={12} className={classes.topicForm}>
+    <Grid container item xs={12} className={classes.topicTable}>
       <DataGrid autoHeight columns={cols} rows={rows} rowCount={20} />
     </Grid>
   );
 };
 
-export default TopicForm;
+export default TopicTable;

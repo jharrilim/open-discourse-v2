@@ -1,16 +1,16 @@
 import { CircularProgress, Grid, makeStyles } from '@material-ui/core';
 import { Columns, DataGrid } from '@material-ui/data-grid';
 import React, { useEffect } from 'react';
-import { useGetTopics } from '../queries';
+import { useGetTopics, useGetUsers } from '../queries';
 
 const useStyles = makeStyles(theme => ({
-  topicForm: {
+  userTable: {
     minHeight: '300px',
   },
 }));
 
-export const TopicForm = () => {
-  const { data, loading, error, startPolling, stopPolling } = useGetTopics();
+export const UserTable = () => {
+  const { data, loading, error, startPolling, stopPolling } = useGetUsers();
   const classes = useStyles();
 
   useEffect(() => {
@@ -22,10 +22,8 @@ export const TopicForm = () => {
 
   if(error)
     console.log(error);
-  console.log(data);
-  const rows = data 
-    ? data.topics.map(d => ({ id: d.id, createdOn: d.createdOn, name: d.name }))
-    : [];
+
+  const rows = data?.users.map(user => ({ id: user.id, createdOn: user.createdOn, name: user.name })) ?? [];
 
   const cols: Columns = [
     { field: 'id', headerName: 'ID', type: 'string', width: 350 },
@@ -36,10 +34,10 @@ export const TopicForm = () => {
   if (loading) return <CircularProgress />;
 
   return (
-    <Grid container item xs={12} className={classes.topicForm}>
+    <Grid container item xs={12} className={classes.userTable}>
       <DataGrid autoHeight columns={cols} rows={rows} rowCount={20} />
     </Grid>
   );
 };
 
-export default TopicForm;
+export default UserTable;

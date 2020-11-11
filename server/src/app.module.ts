@@ -11,6 +11,7 @@ import { GraphQLModule } from '@nestjs/graphql';
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
+      tracing: true,
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',

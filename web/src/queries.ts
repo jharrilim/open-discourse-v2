@@ -31,7 +31,7 @@ export interface GetUsersResult {
 
 export const GET_USERS = gql`
   query {
-    user {
+    users {
       id createdOn name
     }
   }

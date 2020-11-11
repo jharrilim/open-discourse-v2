@@ -1,15 +1,18 @@
 import { Button, CircularProgress, Grid, IconButton, Input, makeStyles, Snackbar, Typography } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import PostForm from '../components/post-form';
 import { TopicForm } from '../components/topic-form';
 import TopicTable from '../components/topic-table';
+import UserTable from '../components/user-table';
 import { useCreateTopic, useCreateUser } from '../mutations';
 
 
 const useStyles = makeStyles(theme => ({
   home: {
-    width: '100vw',
-    height: '100vh',
+    paddingTop: '1.5rem',
+    width: '100%',
+    height: '100%',
   },
 }));
 
@@ -40,7 +43,7 @@ const HomePage = forwardRef<HTMLDivElement>(({ }, ref) => {
 
   return (
     <Grid ref={ref} className={classes.home} container item xs={12} justify="center" alignItems="center">
-      <Grid container item md={8} justify="center" spacing={2}>
+      <Grid container item lg={11} xl={10} justify="center">
         <Typography>Create User</Typography>
         <Grid container item xs={12} justify="center">
           <Input
@@ -69,6 +72,12 @@ const HomePage = forwardRef<HTMLDivElement>(({ }, ref) => {
         </Grid>
         <Grid container item xs={12} justify="center">
           <TopicTable />
+        </Grid>
+        <Grid container item xs={12} justify="center">
+          <UserTable />
+        </Grid>
+        <Grid container item xs={12} justify="center">
+          <PostForm />
         </Grid>
       </Grid>
       <Snackbar

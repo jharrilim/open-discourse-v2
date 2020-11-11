@@ -38,16 +38,15 @@ export interface CreatePostResponse {
   content: string;
 }
 
+// input CreatePostInput {
+//   """The ID of the user who is creating this post."""
+//   userId: String!
+//   """The ID of the topic that this post belongs to."""
+//   topicId: String!
+//   title: String!
+//   content: String!
+// }
 export const CREATE_POST = gql`
-  input CreatePostInput {
-    """The ID of the user who is creating this post."""
-    userId: String!
-
-    """The ID of the topic that this post belongs to."""
-    topicId: String!
-    title: String!
-    content: String!
-  }
   mutation CreatePost($input: CreatePostInput!) {
     createPost(createPostInput: $input) {
       topic { name } title content creator { name }
