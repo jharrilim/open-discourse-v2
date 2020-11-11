@@ -21,6 +21,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_OPENDISCOURSE_43C83 }}'
           channelId: live
           projectId: opendiscourse-43c83
+          entrypoint: web
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
-          PROJECT_PATH: web
+
