@@ -4,6 +4,7 @@ import React, { forwardRef, useCallback, useEffect, useState } from 'react';
 import PostForm from '../components/post-form';
 import { TopicForm } from '../components/topic-form';
 import TopicTable from '../components/topic-table';
+import UserForm from '../components/user-form';
 import UserTable from '../components/user-table';
 import { useCreateTopic, useCreateUser } from '../mutations';
 
@@ -18,49 +19,27 @@ const useStyles = makeStyles(theme => ({
 
 
 const HomePage = forwardRef<HTMLDivElement>(({ }, ref) => {
-  const [createUser, { loading, data, error }] = useCreateUser();
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [username, setUsername] = useState('');
   const classes = useStyles();
 
   const handleSnackbarClose = useCallback(() => {
     setSnackbarOpen(false);
   }, []);
 
-  useEffect(() => {
-    if (loading)
-      return;
-    if (data) {
-      setSnackbarMessage('User created: ' + JSON.stringify(data));
-      setSnackbarOpen(true);
-    }
-    if (error) {
-      setSnackbarMessage('Error: ' + error.message);
-      setSnackbarOpen(true);
-    }
-  }, [loading, data, error]);
 
   return (
     <Grid ref={ref} className={classes.home} container item xs={12} justify="center" alignItems="center">
       <Grid container item lg={11} xl={10} justify="center">
-        <Typography>Create User</Typography>
         <Grid container item xs={12} justify="center">
-          <Input
-            title="Username"
-            placeholder="Username"
-            value={username}
-            onChange={ev => setUsername(ev.target.value)}
-          />
-        </Grid>
-        <Grid container item xs={12} justify="center">
-          <Button
-            variant="contained"
-            color="primary"
-            children="Create User"
-            title="Create User"
-            onClick={() => {
-              createUser({ variables: { name: username } });
+          <UserForm
+            onUserCreated={username => {
+              setSnackbarMessage(`User created: ${username}`);
+              setSnackbarOpen(true);
+            }}
+            onUserCreatedError={err => {
+              setSnackbarMessage(JSON.stringify(err));
+              setSnackbarOpen(true);
             }}
           />
         </Grid>

@@ -1,7 +1,7 @@
 import { CircularProgress, Grid, makeStyles } from '@material-ui/core';
 import { Columns, DataGrid } from '@material-ui/data-grid';
 import React, { useEffect } from 'react';
-import { useGetTopics, useGetUsers } from '../queries';
+import { useGetUsers } from '../queries';
 
 const useStyles = makeStyles(theme => ({
   userTable: {

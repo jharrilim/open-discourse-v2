@@ -14,8 +14,9 @@ export const PostForm = () => {
   const { data: topicsData } = useGetTopics();
 
   useEffect(() => {
-    if (topicsData)
-      setTopicId(topicsData.topics?.[0].id ?? '');
+    console.log(topicsData?.topics);
+    if (topicsData?.topics && topicsData.topics.length > 0)
+      setTopicId(topicsData.topics[0].id ?? '');
   }, [topicsData]);
 
   const submitHandler = useCallback((e: FormEvent<HTMLFormElement>) => {

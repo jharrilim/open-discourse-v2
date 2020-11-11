@@ -3,6 +3,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { CircularProgress, createMuiTheme, CssBaseline, Grid, ThemeProvider } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppNav from './components/app-nav';
+import theme from './app.theme';
 
 const HomePage = React.lazy(() => import('./pages/home'));
 
@@ -10,7 +11,6 @@ const client = new ApolloClient({
   uri: process.env.SERVER_URL ?? 'http://localhost:8765/graphql',
   cache: new InMemoryCache(),
 });
-const theme = createMuiTheme();
 
 const App = () => {
   return (

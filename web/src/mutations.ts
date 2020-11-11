@@ -1,9 +1,11 @@
 import { gql, useMutation } from '@apollo/client';
 
 export interface CreateUserResponse {
-  id: string;
-  name: string;
-  createdOn: string;
+  createUser: {
+    id: string;
+    name: string;
+    createdOn: string;
+  };
 }
 
 export interface CreateUserVariables {
