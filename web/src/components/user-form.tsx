@@ -30,7 +30,7 @@ export const UserForm: FC<UserFormProps> = ({
         onUserCreatedError(err);
       });
 
-  }, [setUsername, createUser, username]);
+  }, [setUsername, createUser, username, onUserCreated, onUserCreatedError]);
 
   return (
     <Grid component="form" container item xs={12} justify="center" onSubmit={submitHandler}>

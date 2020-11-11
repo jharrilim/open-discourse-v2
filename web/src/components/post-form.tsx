@@ -1,4 +1,4 @@
-import { Button, Grid, Input, MenuItem, Select, TextField, Typography } from '@material-ui/core';
+import { Button, Grid, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useCreatePost } from '../mutations';
 import { useCookies } from 'react-cookie';
@@ -9,8 +9,8 @@ export const PostForm = () => {
   const [content, setContent] = useState('');
   const [topicId, setTopicId] = useState('');
 
-  const [cookies, setCookie, removeCookie] = useCookies(['userId']);
-  const [createPost, { data: postData, loading, error }] = useCreatePost();
+  const [cookies] = useCookies(['userId']);
+  const [createPost] = useCreatePost();
   const { data: topicsData } = useGetTopics();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const PostForm = () => {
     const { userId } = cookies;
     createPost({ variables: { content, title, topicId, userId }})
       .then(yeet => yeet.data);
-  }, [createPost, cookies]);
+  }, [createPost, cookies, content, title, topicId]);
 
   return (
     <Grid component="form" container item justify="center" onSubmit={submitHandler}>

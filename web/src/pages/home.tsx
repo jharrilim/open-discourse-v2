@@ -1,12 +1,11 @@
-import { Button, CircularProgress, Grid, IconButton, Input, makeStyles, Snackbar, Typography } from '@material-ui/core';
+import { Button, Grid, IconButton, makeStyles, Snackbar } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
-import React, { forwardRef, useCallback, useEffect, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import PostForm from '../components/post-form';
 import { TopicForm } from '../components/topic-form';
 import TopicTable from '../components/topic-table';
 import UserForm from '../components/user-form';
 import UserTable from '../components/user-table';
-import { useCreateTopic, useCreateUser } from '../mutations';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const HomePage = forwardRef<HTMLDivElement>(({ }, ref) => {
+const HomePage = forwardRef<HTMLDivElement>((props, ref) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const classes = useStyles();

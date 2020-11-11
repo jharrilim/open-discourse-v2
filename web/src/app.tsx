@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import { CircularProgress, createMuiTheme, CssBaseline, Grid, ThemeProvider } from '@material-ui/core';
+import { CircularProgress, CssBaseline, Grid, ThemeProvider } from '@material-ui/core';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AppNav from './components/app-nav';
 import theme from './app.theme';
