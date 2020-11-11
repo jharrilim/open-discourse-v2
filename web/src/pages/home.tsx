@@ -49,13 +49,13 @@ const HomePage = forwardRef<HTMLDivElement>((props, ref) => {
           }} />
         </Grid>
         <Grid container item xs={12} justify="center">
+          <PostForm />
+        </Grid>
+        <Grid container item xs={12} justify="center">
           <TopicTable />
         </Grid>
         <Grid container item xs={12} justify="center">
           <UserTable />
-        </Grid>
-        <Grid container item xs={12} justify="center">
-          <PostForm />
         </Grid>
       </Grid>
       <Snackbar
